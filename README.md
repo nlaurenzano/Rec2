@@ -1,3 +1,10 @@
-# TP-Plus
+# Rec2
 
-Tomo como punto de partida el TP corregido, agrego los puntos pendientes y cualquier adicional que me sirva como práctica para los exámenes.
+Tomo como punto de partida el código del recuperatorio del segundo parcial.
+
+Tareas pendientes:
+
+OK Mostrar listados.
+OK Mejorar el uso de JSON.
+
+- Agregar Baja y Modificación desde el listado.
