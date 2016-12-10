@@ -76,26 +76,15 @@ class Elemento
 		return true;
 	}
 
-	public static function Sacar($campo1) {
-		
-		$elemento = Elemento::TraerPorCampo1($campo1);
-
-		if ($elemento) {
-			// Tenemos el elemento
-			Elemento::Borrar($campo1);
-		} else {
-			echo "No tenemos registrado ningún elemento llamado '$campo1'.";
-		}
-	}
-
 	public static function TraerPorCampo1($campo1) 
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta = $objetoAccesoDato->RetornarConsulta("SELECT campo1, campo2, campo3 FROM listado WHERE campo1 = :campo1 ");
+		$consulta = $objetoAccesoDato->RetornarConsulta("SELECT campo1, campo2, campo3 FROM listado WHERE campo1 = :campo1");
 		$consulta->bindValue(':campo1', $campo1, PDO::PARAM_STR);
 		$consulta->execute();
-		$matBuscado = $consulta->fetchObject('Elemento');
-		return $matBuscado;
+		//return $consulta->fetchObject('Elemento');
+		$elementos = $consulta->fetchall();
+		return $elementos[0];
 	}
 
 	public static function Borrar($campo1)

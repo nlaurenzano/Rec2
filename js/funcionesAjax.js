@@ -46,12 +46,14 @@ switch (tablas.status) {
 		retorno += '<div style="float:left;">';
 
 		// TODO: Cambiar títulos de la tabla
-		retorno += "<table><tr><th>Nombre</th><th>Precio</th><th>Tipo</th></tr>";
+		retorno += "<table><tr><th>Nombre</th><th>Precio</th><th>Tipo</th><th>Acciones</th></tr>";
 
 		for (var i = 0; i <= tablas.data.length - 1; i++) {
 			retorno +=  "<tr><td>" + tablas.data[i].campo1 + "</td>";
 			retorno +=  "<td>" + tablas.data[i].campo2 + "</td>";
 			retorno +=  "<td>" + tablas.data[i].campo3 + "</td>";
+			retorno +=  '<td><button class="btn btn-danger" style="margin-right:5px;"" name="Borrar" onclick="Borrar(\''+tablas.data[i].campo1+'\')">Borrar</button>';
+			retorno +=  '<button class="btn btn-warning" name="Modificar" onclick="Modificar(\''+tablas.data[i].campo1+'\')">Modificar</button></td>';
 			retorno +=  '</tr>';
 		}
 		retorno += '</table></div>';

@@ -28,18 +28,13 @@ switch ($queHago) {
 	case 'Guardar':
 		Elemento::Guardar($_POST['campo1'], $_POST['campo2'], $_POST['campo3']);
 		break;
-	case 'Sacar':
-		Elemento::Sacar($_POST['campo1']);
-		break;
 	case 'Borrar':
 		Elemento::Borrar($_POST['campo1']);
 		break;
-	/*
-	case 'TraerElemento':
-		$elemento = Elemento::TraerPorCampo1($_POST['id']);		
-		echo json_encode($elemento);
+	case 'Modificar':
+		$unElemento = Elemento::TraerPorCampo1($_POST['idModificar']);
+		echo json_encode($unElemento);
 		break;
-	*/
 
 	default:
 		# code...

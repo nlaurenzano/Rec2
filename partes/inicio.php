@@ -8,7 +8,7 @@
 	    </div>
 	        
 		<div class="col-md-10">
-	        <h3>MATERIALES</h3>
+	        <!--<h3>MATERIALES</h3>-->
 	        <br />
 
 	        <div class="text-center" id="formLogin">
