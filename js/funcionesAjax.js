@@ -52,8 +52,8 @@ switch (tablas.status) {
 			retorno +=  "<tr><td>" + tablas.data[i].campo1 + "</td>";
 			retorno +=  "<td>" + tablas.data[i].campo2 + "</td>";
 			retorno +=  "<td>" + tablas.data[i].campo3 + "</td>";
-			retorno +=  '<td><button class="btn btn-danger" style="margin-right:5px;"" name="Borrar" onclick="Borrar(\''+tablas.data[i].campo1+'\')">Borrar</button>';
-			retorno +=  '<button class="btn btn-warning" name="Modificar" onclick="Modificar(\''+tablas.data[i].campo1+'\')">Modificar</button></td>';
+			retorno +=  '<td><button class="btn btn-danger" style="margin-right:5px;"" name="Borrar" onclick="Borrar(\''+tablas.data[i].id+'\')">Borrar</button>';
+			retorno +=  '<button class="btn btn-warning" name="Modificar" onclick="Modificar(\''+tablas.data[i].id+'\')">Modificar</button></td>';
 			retorno +=  '</tr>';
 		}
 		retorno += '</table></div>';

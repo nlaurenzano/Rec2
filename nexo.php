@@ -26,13 +26,13 @@ switch ($queHago) {
 		include("partes/formLogin.php");
 		break;
 	case 'Guardar':
-		Elemento::Guardar($_POST['campo1'], $_POST['campo2'], $_POST['campo3']);
+		Elemento::Guardar($_POST['id'], $_POST['campo1'], $_POST['campo2'], $_POST['campo3']);
 		break;
 	case 'Borrar':
-		Elemento::Borrar($_POST['campo1']);
+		Elemento::Borrar($_POST['idBorrar']);
 		break;
 	case 'Modificar':
-		$unElemento = Elemento::TraerPorCampo1($_POST['idModificar']);
+		$unElemento = Elemento::TraerPorId($_POST['idModificar']);
 		echo json_encode($unElemento);
 		break;
 

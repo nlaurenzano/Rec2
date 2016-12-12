@@ -29,14 +29,9 @@
 			<div class="col-md-3">
 			</div>
 		
-			<div class="col-md-3">
+			<div class="col-md-6">
 				<input type="button" class="btn btn-lg btn-block btn-success" name="guardar" value="Ingresar"
 					onclick="Guardar()" />
-			</div>
-
-			<div class="col-md-3">
-				<input type="button" class="btn btn-lg btn-block btn-success" name="salir" value="Salir" 
-					onclick="Sacar()" />
 			</div>
 
 			<div class="col-md-3">

@@ -1,5 +1,6 @@
 function Guardar()
 {
+	var id=$("#idModificar").val();
 	var campo1=$("#campo1").val();
 	var campo2=$("#campo2").val();
 	var campo3=$("#campo3").val();
@@ -12,6 +13,7 @@ function Guardar()
 		type:"post",
 		data:{
 			queHacer:"Guardar",
+			id:id,
 			campo1:campo1,
 			campo2:campo2,
 			campo3:campo3
@@ -26,27 +28,26 @@ function Guardar()
 	});
 }
 
-function Borrar(idborrar)
+function Borrar(idBorrar)
 {
 	var funcionAjax=$.ajax({
 		url:"nexo.php",
 		type:"post",
 		data:{
 			queHacer:"Borrar",
-			campo1:idborrar
+			idBorrar:idBorrar
 		}
 	});
 	funcionAjax.done(function(retorno){
 		//$("#mensajesABM").html('');
 		Mostrar('MostrarGrilla');
 	});
-	funcionAjax.fail(function(retorno){	
+	funcionAjax.fail(function(retorno){ 
 		$("#mensajesABM").html("Error al borrar: " + retorno.responseText);	
 	});	
 }
 
 function Modificar(idModificar) {
-
 	Mostrar('MostrarAlta');
 
 	var funcionAjax=$.ajax({

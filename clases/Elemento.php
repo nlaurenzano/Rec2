@@ -3,6 +3,7 @@ class Elemento
 {
 //--------------------------------------------------------------------------------//
 //--ATRIBUTOS
+	private $id;
 	private $campo1;
  	private $campo2;
  	private $campo3;
@@ -11,7 +12,11 @@ class Elemento
 
 //--------------------------------------------------------------------------------//
 //--GETTERS Y SETTERS
- 	public function GetCampo1()
+ 	public function GetId()
+	{
+		return $this->id;
+	}
+	public function GetCampo1()
 	{
 		return $this->campo1;
 	}
@@ -24,6 +29,10 @@ class Elemento
 		return $this->campo3;
 	}
 	
+	public function SetId($valor)
+	{
+		$this->id = $valor;
+	}
 	public function SetCampo1($valor)
 	{
 		$this->campo1 = $valor;
@@ -39,10 +48,11 @@ class Elemento
 	
 //--------------------------------------------------------------------------------//
 //--CONSTRUCTOR
-	public function __construct($campo1=NULL)
+	public function __construct($id=NULL)
 	{
-		if($campo1 != NULL){
-			$obj = Elemento::TraerPorCampo1($campo1);
+		if($id != NULL){
+			$obj = Elemento::TraerPorId($id);
+			$this->id = $obj->id;
 			$this->campo1 = $obj->campo1;
 			$this->campo2 = $obj->campo2;
 			$this->campo3 = $obj->campo3;
@@ -53,29 +63,28 @@ class Elemento
 //--TOSTRING	
   	public function ToString()
 	{
-	  	return $this->campo1."  ".$this->campo2."  ".$this->campo3;
+	  	return $this->id."  ".$this->campo1."  ".$this->campo2."  ".$this->campo3;
 	}
 //--------------------------------------------------------------------------------//
 
 //--------------------------------------------------------------------------------//
 //--METODO DE CLASE
 
-	public static function Guardar($campo1, $campo2, $campo3) {
+	public static function Guardar($id, $campo1, $campo2, $campo3) {
 		
-		if (Elemento::TraerPorCampo1($campo1)) {
-				echo "No tenemos registrado ningún elemento llamado '$campo1'.";
-				return false;
-			} else {
-				$unElemento = new Elemento();
-				$unElemento->SetCampo1($campo1);
-				$unElemento->SetCampo2($campo2);
-				$unElemento->SetCampo3($campo3);
+		$unElemento = new Elemento();
+		$unElemento->SetId($id);
+		$unElemento->SetCampo1($campo1);
+		$unElemento->SetCampo2($campo2);
+		$unElemento->SetCampo3($campo3);
 
-				$unElemento->Insertar();
-			}
-		return true;
+		if ($unElemento->id > 0) {
+			$unElemento->Modificar();
+		} else {
+			$unElemento->Insertar();
+		}
 	}
-
+/*
 	public static function TraerPorCampo1($campo1) 
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
@@ -86,12 +95,23 @@ class Elemento
 		$elementos = $consulta->fetchall();
 		return $elementos[0];
 	}
-
-	public static function Borrar($campo1)
+*/
+	public static function TraerPorId($id) 
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("DELETE FROM listado WHERE campo1 = :campo1");	
-		$consulta->bindValue(':campo1', $campo1, PDO::PARAM_STR);		
+		$consulta = $objetoAccesoDato->RetornarConsulta("SELECT id, campo1, campo2, campo3 FROM listado WHERE id = :id");
+		$consulta->bindValue(':id', $id, PDO::PARAM_STR);
+		$consulta->execute();
+		//return $consulta->fetchObject('Elemento');
+		$elementos = $consulta->fetchall();
+		return $elementos[0];
+	}
+
+	public static function Borrar($id)
+	{
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+		$consulta =$objetoAccesoDato->RetornarConsulta("DELETE FROM listado WHERE id = :id");	
+		$consulta->bindValue(':id', $id, PDO::PARAM_STR);		
 		$consulta->execute();
 		return $consulta->rowCount();
 	}
@@ -99,7 +119,7 @@ class Elemento
 	public static function TraerTodos()
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-		$consulta=$objetoAccesoDato->RetornarConsulta("SELECT campo1,campo2,campo3 FROM listado");
+		$consulta=$objetoAccesoDato->RetornarConsulta("SELECT id,campo1,campo2,campo3 FROM listado");
 		$consulta->execute();
 
 		//return $consulta->fetchall(PDO::FETCH_CLASS,"Elemento");
@@ -123,12 +143,16 @@ class Elemento
 	
 	public function Modificar()
 	{
-		
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+		$consulta = $objetoAccesoDato->RetornarConsulta("
+			UPDATE listado SET campo1=:campo1,campo2=:campo2',campo3=:campo3' WHERE id=:id");
+		$consulta->bindValue(':campo1',$this->campo1, PDO::PARAM_STR);
+		$consulta->bindValue(':campo2',$this->campo2, PDO::PARAM_STR);
+		$consulta->bindValue(':campo3',$this->campo3, PDO::PARAM_STR);
+		$consulta->bindValue(':id',$this->id, PDO::PARAM_STR);
+		$consulta->execute();
 	}
 
 //--------------------------------------------------------------------------------//
-
-
-
 
 }
