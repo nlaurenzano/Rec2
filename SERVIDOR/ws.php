@@ -23,6 +23,24 @@
 		return Elemento::TraerTodos();
 	}
 
+
+
+	$server->register('BorrarId',
+						array('id' => 'xsd:int'),
+						array('return' => 'xsd:Array'),
+						'urn:wsElem',
+						'urn:wsElem#BorrarId',
+						'rpc',
+						'encoded',
+						'Obtiene todos los elementos.'
+					);
+
+
+	function BorrarId($id) {
+		Elemento::Borrar($id);
+		return Elemento::TraerTodos();
+	}
+
 ///**********************************************************************************************************///								
 
 	$HTTP_RAW_POST_DATA = file_get_contents("php://input");	

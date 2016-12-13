@@ -37,6 +37,7 @@ function MostrarLogin() {
 }
 
 function MostrarJSON(tablas) {
+	//return tablas;
 	tablas = JSON.parse(tablas);
 	var retorno;
 

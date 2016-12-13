@@ -98,7 +98,6 @@ function getCookie(cname) {
 
 function borrarCookies() {
 	document.cookie = "ultimoIngresado=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
-	document.cookie = "registro=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 	//document.cookie = "ultimoIngresado=";
 	MostrarUltimo();
 }

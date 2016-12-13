@@ -40,7 +40,8 @@ function Borrar(idBorrar)
 	});
 	funcionAjax.done(function(retorno){
 		//$("#mensajesABM").html('');
-		Mostrar('MostrarGrilla');
+		//Mostrar('MostrarGrilla');
+		$("#listados").html(MostrarJSON(retorno));
 	});
 	funcionAjax.fail(function(retorno){ 
 		$("#mensajesABM").html("Error al borrar: " + retorno.responseText);	

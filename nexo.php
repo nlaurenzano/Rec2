@@ -17,7 +17,6 @@ switch ($queHago) {
 		break;
 	case 'MostrarGrilla':
 		include("partes/grilla.php");
-		//ImprimirTablas();
 		break;
 	case 'MostrarAdmin':
 		include("partes/admin.php");
@@ -29,7 +28,8 @@ switch ($queHago) {
 		Elemento::Guardar($_POST['id'], $_POST['campo1'], $_POST['campo2'], $_POST['campo3']);
 		break;
 	case 'Borrar':
-		Elemento::Borrar($_POST['idBorrar']);
+		//Elemento::Borrar($_POST['idBorrar']);
+		echo BorrarWS($_POST['idBorrar']);
 		break;
 	case 'Modificar':
 		$unElemento = Elemento::TraerPorId($_POST['idModificar']);
@@ -41,31 +41,82 @@ switch ($queHago) {
 		break;
 }
 
+function ObtenerHost() {
+	return 'http://localhost:8080/rec2/SERVIDOR/ws.php';
+}
+
 function TraerWS() {
-	$host = 'http://localhost:8080/rec2/SERVIDOR/ws.php';
+	$host = ObtenerHost();
 	$client = new nusoap_client($host . '?wsdl');
 	$err = $client->getError();
 	if ($err) {
-		//echo '<h2>ERROR EN LA CONSTRUCCION DEL WS:</h2><pre>' . $err . '</pre>';
 		echo '{"status" : "fail","data" : "ERROR EN LA CONSTRUCCION DEL WS","message" : "' . $err . '"}';
-		//die();
 	} else {
 
 		$listado = $client->call('TraerTodos');
 
 		if ($client->fault) {
-			//echo '<h2>ERROR AL INVOCAR METODO:</h2><pre>';
-			//print_r($listado);
-			//echo '</pre>';
 			echo '{"status" : "fail","data" : "ERROR AL INVOCAR METODO",message" : "' . print_r($listado) . '"}';
 		} else {
 			$err = $client->getError();
 			if ($err) {
-				//echo '<h2>ERROR EN EL CLIENTE:</h2><pre>' . $err . '</pre>';
 				echo '{"status" : "error","message" : "' . $err . '"}';
 			} 
 			else {
-				//echo json_encode($listado);
+				$retorno = '{"status" : "success","data" :';
+	        	$retorno .= json_encode($listado);
+	        	$retorno .= '}';
+	        	echo $retorno;
+			}
+		}
+	}
+}
+
+function BorrarWS($id) {
+	$host = ObtenerHost();
+	$client = new nusoap_client($host . '?wsdl');
+	$err = $client->getError();
+	if ($err) {
+		echo '{"status" : "fail","data" : "ERROR EN LA CONSTRUCCION DEL WS","message" : "' . $err . '"}';
+	} else {
+
+		$listado = $client->call('BorrarId',array($id));
+
+		if ($client->fault) {
+			echo '{"status" : "fail","data" : "ERROR AL INVOCAR METODO",message" : "' . print_r($listado) . '"}';
+		} else {
+			$err = $client->getError();
+			if ($err) {
+				echo '{"status" : "error","message" : "' . $err . '"}';
+			} 
+			else {
+				$retorno = '{"status" : "success","data" :';
+	        	$retorno .= json_encode($listado);
+	        	$retorno .= '}';
+	        	echo $retorno;
+			}
+		}
+	}
+}
+
+function GuardarWS($id) {
+	$host = ObtenerHost();
+	$client = new nusoap_client($host . '?wsdl');
+	$err = $client->getError();
+	if ($err) {
+		echo '{"status" : "fail","data" : "ERROR EN LA CONSTRUCCION DEL WS","message" : "' . $err . '"}';
+	} else {
+
+		$listado = $client->call('BorrarId',array($id));
+
+		if ($client->fault) {
+			echo '{"status" : "fail","data" : "ERROR AL INVOCAR METODO",message" : "' . print_r($listado) . '"}';
+		} else {
+			$err = $client->getError();
+			if ($err) {
+				echo '{"status" : "error","message" : "' . $err . '"}';
+			} 
+			else {
 				$retorno = '{"status" : "success","data" :';
 	        	$retorno .= json_encode($listado);
 	        	$retorno .= '}';
