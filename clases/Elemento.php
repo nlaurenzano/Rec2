@@ -100,7 +100,7 @@ class Elemento
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 		$consulta = $objetoAccesoDato->RetornarConsulta("SELECT id, campo1, campo2, campo3 FROM listado WHERE id = :id");
-		$consulta->bindValue(':id', $id, PDO::PARAM_STR);
+		$consulta->bindValue(':id', $id, PDO::PARAM_INT);
 		$consulta->execute();
 		//return $consulta->fetchObject('Elemento');
 		$elementos = $consulta->fetchall();
@@ -111,7 +111,7 @@ class Elemento
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 		$consulta =$objetoAccesoDato->RetornarConsulta("DELETE FROM listado WHERE id = :id");	
-		$consulta->bindValue(':id', $id, PDO::PARAM_STR);		
+		$consulta->bindValue(':id', $id, PDO::PARAM_INT);		
 		$consulta->execute();
 		return $consulta->rowCount();
 	}
@@ -145,11 +145,11 @@ class Elemento
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 		$consulta = $objetoAccesoDato->RetornarConsulta("
-			UPDATE listado SET campo1=:campo1,campo2=:campo2',campo3=:campo3' WHERE id=:id");
+			UPDATE listado SET campo1=:campo1,campo2=:campo2,campo3=:campo3 WHERE id=:id");
 		$consulta->bindValue(':campo1',$this->campo1, PDO::PARAM_STR);
 		$consulta->bindValue(':campo2',$this->campo2, PDO::PARAM_STR);
 		$consulta->bindValue(':campo3',$this->campo3, PDO::PARAM_STR);
-		$consulta->bindValue(':id',$this->id, PDO::PARAM_STR);
+		$consulta->bindValue(':id',$this->id, PDO::PARAM_INT);
 		$consulta->execute();
 	}
 

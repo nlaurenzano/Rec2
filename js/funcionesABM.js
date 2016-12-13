@@ -3,10 +3,10 @@ function Guardar()
 	var id=$("#idModificar").val();
 	var campo1=$("#campo1").val();
 	var campo2=$("#campo2").val();
-	var campo3=$("#campo3").val();
+	var campo3=$('#campo3:checked').val();
 	$("#campo1").val('');
 	$("#campo2").val('');
-	//$("#campo3").checked(false);
+	$('#campo3:checked').prop("checked", false);
 
 	var funcionAjax=$.ajax({
 		url:"nexo.php",
@@ -61,9 +61,9 @@ function Modificar(idModificar) {
 	funcionAjax.done(function(retorno){
 		var elemento =JSON.parse(retorno);
 		$("#campo1").val(elemento.campo1);
-		$("#idModificar").val(elemento.campo1);
+		$("#idModificar").val(elemento.id);
 		$("#campo2").val(elemento.campo2);
-		$("#campo3").val(elemento.campo3);
+		$("#campo3[value="+elemento.campo3+"]").prop('checked',true);
 	});
 	funcionAjax.fail(function(retorno){	
 		$("#mensajesABM").html("Error al borrar: " + retorno.responseText);	

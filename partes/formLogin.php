@@ -96,7 +96,7 @@ if(!isset($_SESSION['registrado'])){  ?>
   echo"<h3>Bienvenido ".$_SESSION['registrado'].".</h3>";?>
 
   <button onclick="deslogear()" class="btn btn-lg btn-block btn-success" type="button">
-    <span class="glyphicon glyphicon-off">&nbsp;</span>Desconectar
+    Desconectar
   </button>
 
  <script type="text/javascript">

@@ -42,7 +42,7 @@ switch ($queHago) {
 }
 
 function TraerWS() {
-	$host = 'http://localhost:80/rec2/SERVIDOR/ws.php';
+	$host = 'http://localhost:8080/rec2/SERVIDOR/ws.php';
 	$client = new nusoap_client($host . '?wsdl');
 	$err = $client->getError();
 	if ($err) {

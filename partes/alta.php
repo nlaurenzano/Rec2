@@ -12,7 +12,7 @@
 			</div>
 		
 			<div class="col-md-6">
-				<input type="text" name="campo1" id="campo1" placeholder="Nombre" class="form-control input-lg"  />
+				<input type="text" name="campo1" id="campo1" required="true" placeholder="Nombre" class="form-control input-lg"  />
 				<input type="text" name="campo2" id="campo2" placeholder="Precio" class="form-control input-lg" />
 
 				<input type="radio" name="campo3" id="campo3" value="solido" />Sólido
